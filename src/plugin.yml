@@ -4,7 +4,7 @@ main: de.IDev.ifh.FFA
 name: FFA
 version: 1.0
 author: I_Dev
-description: Unser FFA Plugin.
+description: Unser FFA Plugin
 
 
 commands:
