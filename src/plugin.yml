@@ -1,0 +1,9 @@
+main: de.I_Dev.FFA.Main
+
+name: FFA
+version: 1.0
+auhtor: I_Dev
+
+commands:
+    setspawn:
+    stats:
