@@ -27,9 +27,9 @@ public class Bow implements Listener {
 		int range = 10;
 		for(Entity en : e.getEntity().getNearbyEntities(range, range, range)) {
 			if(en instanceof Player) {
-			Location t = e.getEntity().getNearbyEntities(10, 10, 10).get(0).getLocation();
-			e.getProjectile().setVelocity(t.subtract(e.getEntity().getLocation()).toVector().multiply(e.getForce()));
-			break;
+				Location t = e.getEntity().getNearbyEntities(10, 10, 10).get(0).getLocation();
+				e.getProjectile().setVelocity(t.subtract(e.getEntity().getLocation()).toVector().multiply(e.getForce()));
+				break;
 			}
 		}
 
@@ -43,7 +43,9 @@ public class Bow implements Listener {
 			return;
 		if (!e.getEntity().getCustomName().equalsIgnoreCase("UltraBowShot"))
 			return;
-
+//		if(!(e.getHitEntity() instanceof Player))
+//			return;
+		
 		/*
 		 * To get a accurate Location of the arrow
 		 * Else The HitEvent will get a estimated location
@@ -52,9 +54,25 @@ public class Bow implements Listener {
 
 			@Override
 			public void run() {
+				Location arrowloc = e.getEntity().getLocation();
 				Location loc = e.getEntity().getLocation();
-				Arrow arrow = (Arrow) loc.getWorld().spawnEntity(loc.clone().add(0, 5, 0), EntityType.ARROW);
-				arrow.setVelocity(new Vector(0, -1, 0).normalize().multiply(0.2));
+				
+				double radius = 5;
+				double accuracy = 10;
+				
+				for(double i = 0; i <= 90; i = i + accuracy) {
+					double x = (Math.sin(i)*radius);
+					double z = (Math.cos(i)*radius);
+					
+			//		double z = Math.sqrt(Math.pow(radius, 2)-Math.pow(i, 2));
+					
+					Arrow arrow = (Arrow) loc.getWorld().spawnEntity(loc.clone().add(x, 5, z), EntityType.ARROW);
+					arrow.setVelocity(new Vector(0, -1, 0).normalize().multiply(0.2));
+					
+				}
+				
+	//			Arrow arrow = (Arrow) loc.getWorld().spawnEntity(loc.clone().add(0, 5, 0), EntityType.ARROW);
+	//			arrow.setVelocity(new Vector(0, -1, 0).normalize().multiply(0.2));
 			}
 		}, 1L);
 	}
