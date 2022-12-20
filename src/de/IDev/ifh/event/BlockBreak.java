@@ -12,6 +12,7 @@ public class BlockBreak implements Listener{
 
 	@EventHandler
 	public void a(BlockBreakEvent e) {
+		e.setDropItems(false);
 		if(e.getPlayer().getGameMode() != GameMode.SURVIVAL) return;
 		e.setCancelled(true);
 		if(e.getBlock().getType() == Material.IRON_ORE) {

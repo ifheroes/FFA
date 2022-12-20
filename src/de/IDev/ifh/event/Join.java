@@ -20,6 +20,8 @@ public class Join implements Listener {
 		p.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(100);
 		e.setJoinMessage("§7› "+p.getName()+" hat das Spiel betreten");
 		
+		p.setMaximumNoDamageTicks(10);
+		
 		Object kills = FFA.playerData.getobject(p.getUniqueId() + ".kills");
 		Object deaths = FFA.playerData.getobject(p.getUniqueId() + ".deaths");
 		new StatsData(p, (int) (deaths != null ? deaths : 0), (int) (kills != null ? kills : 0));

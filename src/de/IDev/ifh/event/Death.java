@@ -2,13 +2,21 @@ package de.IDev.ifh.event;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.ArmorStand.LockType;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import de.IDev.ifh.FFA;
 import de.IDev.ifh.Utils.StatsData;
@@ -35,7 +43,31 @@ public class Death implements Listener {
 		
 		Location loc = p.getLocation();
 		p.getWorld().spawnParticle(Particle.BUBBLE_POP, loc.add(0, 1, 0), 100);
-	
+		
+		ArmorStand soul = (ArmorStand) loc.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND);
+		soul.setSmall(true);
+		soul.setBasePlate(false);
+		soul.setArms(false);
+		soul.setVisible(false);
+		soul.getEquipment().setHelmet(new ItemStack(Material.WHITE_STAINED_GLASS));
+		soul.addEquipmentLock(EquipmentSlot.HEAD, LockType.REMOVING_OR_CHANGING);
+		soul.setGravity(false);
+		
+		new BukkitRunnable() {
+			int count = 2;
+			@Override
+			public void run() {
+				
+				soul.teleport(soul.getLocation().add(0, 0.2, 0));
+				
+				count++;
+				if(count >= 30) {
+					soul.remove();
+					this.cancel();
+				}
+			}
+		}.runTaskTimer(JavaPlugin.getPlugin(FFA.class), 0L, 2L);
+		
 	}
 	
 	@EventHandler

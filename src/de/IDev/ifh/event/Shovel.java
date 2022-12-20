@@ -32,14 +32,17 @@ public class Shovel implements Listener {
 		if (e.getAction() != Action.RIGHT_CLICK_AIR && e.getAction() == Action.RIGHT_CLICK_BLOCK)
 			return;
 		Player p = e.getPlayer();
-		delay.add(p);
 
 		ItemStack hand = p.getInventory().getItemInMainHand();
 		if (hand == null)
 			return;
 		if (hand.getType() != Material.STONE_SHOVEL)
 			return;
-
+		if(delay.contains(p))
+			return;
+		delay.add(p);
+		removedelay(p);
+		
 		int range = 10;
 		List<Entity> entitys = p.getNearbyEntities(range, range / 2, range);
 		for (Entity en : entitys) {
@@ -48,6 +51,7 @@ public class Shovel implements Listener {
 			Player ent = (Player) en;
 
 			Location loc = p.getLocation().clone();
+			//For Saftey
 			loc.add(ent.getLocation().subtract(loc).multiply(0.1));
 			double steps = 10;
 
@@ -56,6 +60,7 @@ public class Shovel implements Listener {
 
 				@Override
 				public void run() {
+					
 					Location point = loc.clone().add(ent.getLocation().subtract(loc).multiply(step / steps));
 					step++;
 					BlockData blockdata = point.clone().add(0, -1, 0).getBlock().getBlockData();
@@ -71,17 +76,37 @@ public class Shovel implements Listener {
 		}
 	}
 
+	private void removedelay(Player p) {
+		Bukkit.getScheduler().runTaskLater(FFA.getPlugin(FFA.class), new Runnable() {
+
+			@Override
+			public void run() {
+				delay.remove(p);
+			}
+		}, 20L);
+	}
+
 	public void spawnFallingBlock(Location loc, BlockData m) {
 		FallingBlock b = loc.getWorld().spawnFallingBlock(loc, m);
+		
+		b.setDropItem(false);
+		
 		b.setVelocity(new Vector(0, 0.2, 0));
 		loc.getWorld().spawnParticle(Particle.CRIT, loc.clone().add(0, 0.1, 0), 10);
 		Bukkit.getScheduler().runTaskLater(FFA.getPlugin(FFA.class), new Runnable() {
 
 			@Override
 			public void run() {
-				b.remove();
+				loc.getBlock().setBlockData(m);
 			}
-		}, 20L);
+		}, 2L);
+		Bukkit.getScheduler().runTaskLater(FFA.getPlugin(FFA.class), new Runnable() {
+
+			@Override
+			public void run() {
+			//	b.remove();
+			}
+		}, 5L);
 	}
 
 	public void addDamage(Player ent, Player damager) {
