@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -15,6 +16,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.CreativeCategory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -29,10 +32,12 @@ public class Shovel implements Listener {
 
 	@EventHandler
 	public void a(PlayerInteractEvent e) {
-		if (e.getAction() != Action.RIGHT_CLICK_AIR && e.getAction() == Action.RIGHT_CLICK_BLOCK)
+		if (e.getAction() != Action.RIGHT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_BLOCK)
 			return;
 		Player p = e.getPlayer();
-
+		if(e.getPlayer().getGameMode() != GameMode.CREATIVE)
+			e.setCancelled(true);
+		
 		ItemStack hand = p.getInventory().getItemInMainHand();
 		if (hand == null)
 			return;
@@ -123,5 +128,20 @@ public class Shovel implements Listener {
 			}
 		}, 20L);
 	}
-
+	
+	@EventHandler
+	public void a(PlayerMoveEvent e) {
+		Player p = e.getPlayer();
+		for(Entity en : p.getNearbyEntities(1, 1, 1)) {
+			if(!(en instanceof FallingBlock)) continue;
+			
+			Location middle = en.getLocation().getBlock().getLocation().add(0.5, 0.5, 0.5);
+			Location playerLoc = p.getLocation();
+			if(playerLoc.distance(middle) <= 0.4) {
+				p.setVelocity(new Vector(0, 1, 0).normalize().multiply(0.4));
+			}
+			break;
+		}
+	}
+	
 }

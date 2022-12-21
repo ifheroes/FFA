@@ -5,8 +5,9 @@ import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockDropItemEvent;
 
-import de.IDev.ifh.Utils.CustomItem;
+import de.IDev.ifh.utils.CustomItem;
 
 public class BlockBreak implements Listener{
 
@@ -20,5 +21,5 @@ public class BlockBreak implements Listener{
 			ingot.setName("§bEisen");
 			e.getPlayer().getInventory().addItem(ingot.getItem());
 		}
-	}	
+	}
 }

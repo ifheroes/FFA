@@ -11,16 +11,18 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import de.IDev.ifh.FFA;
-import de.IDev.ifh.Utils.CustomItem;
+import de.IDev.ifh.utils.CustomItem;
 
 public class Test implements CommandExecutor {
 
@@ -31,7 +33,10 @@ public class Test implements CommandExecutor {
 			return true;
 		}
 
-		String key = "blaze";
+		String key = "armorstand";
+		if(args.length != 0) {
+			key = args[0];
+		}
 		Player p = (Player) s;
 
 		switch (key) {
@@ -68,7 +73,7 @@ public class Test implements CommandExecutor {
 			BlockData bd = p.getLocation().clone().add(0, -1, 0).getBlock().getBlockData();
 			spawnFallingBlock(p.getLocation().clone().add(0, -0.1, 0), bd);
 			break;
-		case "item":
+		case "pickaxe":
 			CustomItem item = new CustomItem(Material.IRON_PICKAXE);
 			item.setName("§6Spitzhacke der Farmer");
 			item.setLore("§bEinst eine wahre besonderheit", "§bist sie heute nur noch", "§bschrott und verdreckt");
@@ -88,6 +93,55 @@ public class Test implements CommandExecutor {
 					blaze.teleport(p.getLocation().clone().add(0, 3, 0));
 				}
 			}.runTaskTimer(FFA.getPlugin(FFA.class), 0L, 1L);
+			
+			break;
+		case "armor":
+			CustomItem helm = new CustomItem(Material.NETHERITE_HELMET);
+			helm.setName("Strong Helmet");
+			helm.addEnchants(Enchantment.PROTECTION_ENVIRONMENTAL, 10);
+			
+			CustomItem chest = new CustomItem(Material.NETHERITE_CHESTPLATE);
+			chest.setName("Strong Chestplate");
+			chest.addEnchants(Enchantment.PROTECTION_ENVIRONMENTAL, 10);
+			
+			CustomItem legs = new CustomItem(Material.NETHERITE_LEGGINGS);
+			legs.setName("Strong Leggings");
+			legs.addEnchants(Enchantment.PROTECTION_ENVIRONMENTAL, 10);
+			
+			CustomItem boots = new CustomItem(Material.NETHERITE_BOOTS);
+			boots.setName("Strong Boots");
+			boots.addEnchants(Enchantment.PROTECTION_ENVIRONMENTAL, 10);
+			
+			p.getInventory().addItem(helm.getItem());
+			p.getInventory().addItem(chest.getItem());
+			p.getInventory().addItem(legs.getItem());
+			p.getInventory().addItem(boots.getItem());
+			
+			break;
+			
+		case "ultrabow":
+			
+			CustomItem b = new CustomItem(Material.BOW);
+			b.setName("§bUltra Bow");
+			p.getInventory().addItem(b.getItem());
+			
+			break;
+		
+		case "expobow":
+			
+			CustomItem b1 = new CustomItem(Material.BOW);
+			b1.setName("§cExplosive Bow");
+			p.getInventory().addItem(b1.getItem());
+			
+			break;
+			
+		case "armorstand":
+			
+			ArmorStand armorstand = (ArmorStand) p.getWorld().spawnEntity(p.getLocation(), EntityType.ARMOR_STAND);
+			armorstand.setBasePlate(false);
+			armorstand.getEquipment().setHelmet(new ItemStack(Material.DIAMOND_HELMET));
+			armorstand.setSmall(true);
+			armorstand.setVisible(false);
 			
 			break;
 		default:

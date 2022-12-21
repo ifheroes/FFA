@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scoreboard.Team;
 
 import de.IDev.ifh.FFA;
-import de.IDev.ifh.Utils.StatsData;
+import de.IDev.ifh.utils.StatsData;
 import net.luckperms.api.model.user.User;
 
 public class Leave implements Listener{

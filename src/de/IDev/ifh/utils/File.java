@@ -1,7 +1,9 @@
-package de.IDev.ifh.Utils;
+package de.IDev.ifh.utils;
 
 import java.io.IOException;
+
 import org.bukkit.configuration.file.YamlConfiguration;
+
 import de.IDev.ifh.FFA;
 
 public class File {
@@ -23,14 +25,6 @@ public class File {
 
 		if (!f.getParentFile().exists())
 			f.getParentFile().mkdirs();
-	/*	if (!f.exists()) {
-			System.out.println("test");
-			try {
-				f.createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} */
 
 		yml = YamlConfiguration.loadConfiguration(f);
 

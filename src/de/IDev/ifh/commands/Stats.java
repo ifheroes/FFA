@@ -5,7 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import de.IDev.ifh.Utils.StatsData;
+import de.IDev.ifh.utils.StatsData;
 
 public class Stats implements CommandExecutor {
 

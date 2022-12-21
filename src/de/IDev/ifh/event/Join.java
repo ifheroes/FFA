@@ -9,7 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import de.IDev.ifh.FFA;
-import de.IDev.ifh.Utils.StatsData;
+import de.IDev.ifh.utils.StatsData;
 
 public class Join implements Listener {
 

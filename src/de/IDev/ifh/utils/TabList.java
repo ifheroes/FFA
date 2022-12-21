@@ -1,4 +1,4 @@
-package de.IDev.ifh.Utils;
+package de.IDev.ifh.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

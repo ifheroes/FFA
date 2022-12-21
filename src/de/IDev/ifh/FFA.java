@@ -6,9 +6,6 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import de.IDev.ifh.Utils.File;
-import de.IDev.ifh.Utils.StatsData;
-import de.IDev.ifh.Utils.TabList;
 import de.IDev.ifh.commands.DeleteMessage;
 import de.IDev.ifh.commands.Gamemode;
 import de.IDev.ifh.commands.Heal;
@@ -17,6 +14,7 @@ import de.IDev.ifh.commands.SetSpawn;
 import de.IDev.ifh.commands.Spawn;
 import de.IDev.ifh.commands.Stats;
 import de.IDev.ifh.commands.Test;
+import de.IDev.ifh.enchantments.EnchantmentExecuter;
 import de.IDev.ifh.event.BlockBreak;
 import de.IDev.ifh.event.Bow;
 import de.IDev.ifh.event.Chat;
@@ -28,6 +26,9 @@ import de.IDev.ifh.event.Join;
 import de.IDev.ifh.event.Leave;
 import de.IDev.ifh.event.Phsic;
 import de.IDev.ifh.event.Shovel;
+import de.IDev.ifh.utils.File;
+import de.IDev.ifh.utils.StatsData;
+import de.IDev.ifh.utils.TabList;
 import net.luckperms.api.LuckPerms;
 
 /*stats:
@@ -74,6 +75,7 @@ public class FFA extends JavaPlugin{
 		pm.registerEvents(new BlockBreak(), this);
 		pm.registerEvents(new Bow(), this);
 		pm.registerEvents(new Explosion(), this);
+		pm.registerEvents(new EnchantmentExecuter(), this);
 		
 		for(Player p : Bukkit.getOnlinePlayers()) {
 			Object kills = playerData.getobject(p.getUniqueId() + ".kills");
