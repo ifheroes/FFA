@@ -1,6 +1,7 @@
 package de.IDev.ifh.commands;
 
 import java.util.List;
+import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -18,10 +19,12 @@ import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import de.IDev.ifh.FFA;
+import de.IDev.ifh.customs.CustomEnchant;
 import de.IDev.ifh.utils.CustomItem;
 
 public class Test implements CommandExecutor {
@@ -76,7 +79,6 @@ public class Test implements CommandExecutor {
 		case "pickaxe":
 			CustomItem item = new CustomItem(Material.IRON_PICKAXE);
 			item.setName("§6Spitzhacke der Farmer");
-			item.setLore("§bEinst eine wahre besonderheit", "§bist sie heute nur noch", "§bschrott und verdreckt");
 			item.addEnchants(Enchantment.DIG_SPEED, 10);
 			p.getInventory().addItem(item.getItem());
 			break;
@@ -144,6 +146,20 @@ public class Test implements CommandExecutor {
 			armorstand.setVisible(false);
 			
 			break;
+			
+		case "sword":
+			
+			CustomItem customItem = new CustomItem(Material.WOODEN_SWORD);
+			customItem.setName("§6Schwert");
+			p.getInventory().addItem(customItem.getItem());
+			
+			
+			break;
+			
+		case "changeitem":
+			changeItemMeta(p.getInventory().getItemInMainHand());
+			
+			break;
 		default:
 			return true;
 		}
@@ -169,4 +185,10 @@ public class Test implements CommandExecutor {
 		}, 20L);
 	}
 
+	public void changeItemMeta(ItemStack stack) {
+		ItemMeta meta = stack.getItemMeta();
+		meta.setDisplayName("Test"+new Random().nextInt(20));
+		stack.setItemMeta(meta);
+	}
+	
 }

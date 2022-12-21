@@ -1,4 +1,4 @@
-package de.IDev.ifh.enchantments;
+package de.IDev.ifh.customs;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

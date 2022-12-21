@@ -36,13 +36,14 @@ public class Shovel implements Listener {
 			return;
 		Player p = e.getPlayer();
 		if(e.getPlayer().getGameMode() != GameMode.CREATIVE)
-			e.setCancelled(true);
-		
+			return;
 		ItemStack hand = p.getInventory().getItemInMainHand();
 		if (hand == null)
 			return;
 		if (hand.getType() != Material.STONE_SHOVEL)
 			return;
+
+		e.setCancelled(true);
 		if(delay.contains(p))
 			return;
 		delay.add(p);

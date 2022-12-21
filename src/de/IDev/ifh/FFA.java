@@ -14,7 +14,7 @@ import de.IDev.ifh.commands.SetSpawn;
 import de.IDev.ifh.commands.Spawn;
 import de.IDev.ifh.commands.Stats;
 import de.IDev.ifh.commands.Test;
-import de.IDev.ifh.enchantments.EnchantmentExecuter;
+import de.IDev.ifh.customs.EnchantmentExecuter;
 import de.IDev.ifh.event.BlockBreak;
 import de.IDev.ifh.event.Bow;
 import de.IDev.ifh.event.Chat;
@@ -22,6 +22,7 @@ import de.IDev.ifh.event.Damage;
 import de.IDev.ifh.event.Death;
 import de.IDev.ifh.event.Explosion;
 import de.IDev.ifh.event.ItemPickUp;
+import de.IDev.ifh.event.ItemUpgrade;
 import de.IDev.ifh.event.Join;
 import de.IDev.ifh.event.Leave;
 import de.IDev.ifh.event.Phsic;
@@ -76,6 +77,7 @@ public class FFA extends JavaPlugin{
 		pm.registerEvents(new Bow(), this);
 		pm.registerEvents(new Explosion(), this);
 		pm.registerEvents(new EnchantmentExecuter(), this);
+		pm.registerEvents(new ItemUpgrade(), this);
 		
 		for(Player p : Bukkit.getOnlinePlayers()) {
 			Object kills = playerData.getobject(p.getUniqueId() + ".kills");
