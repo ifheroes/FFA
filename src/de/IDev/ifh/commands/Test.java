@@ -1,5 +1,6 @@
 package de.IDev.ifh.commands;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -11,6 +12,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.MemorySection;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
@@ -24,8 +26,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import de.IDev.ifh.FFA;
-import de.IDev.ifh.customs.CustomEnchant;
-import de.IDev.ifh.utils.CustomItem;
+import de.IDev.ifh.customs.CustomItem;
 
 public class Test implements CommandExecutor {
 
@@ -36,7 +37,7 @@ public class Test implements CommandExecutor {
 			return true;
 		}
 
-		String key = "armorstand";
+		String key = "expobow";
 		if(args.length != 0) {
 			key = args[0];
 		}
@@ -118,47 +119,45 @@ public class Test implements CommandExecutor {
 			p.getInventory().addItem(chest.getItem());
 			p.getInventory().addItem(legs.getItem());
 			p.getInventory().addItem(boots.getItem());
-			
 			break;
-			
 		case "ultrabow":
-			
 			CustomItem b = new CustomItem(Material.BOW);
 			b.setName("§bUltra Bow");
 			p.getInventory().addItem(b.getItem());
-			
 			break;
-		
 		case "expobow":
-			
 			CustomItem b1 = new CustomItem(Material.BOW);
 			b1.setName("§cExplosive Bow");
 			p.getInventory().addItem(b1.getItem());
-			
 			break;
-			
 		case "armorstand":
-			
 			ArmorStand armorstand = (ArmorStand) p.getWorld().spawnEntity(p.getLocation(), EntityType.ARMOR_STAND);
 			armorstand.setBasePlate(false);
 			armorstand.getEquipment().setHelmet(new ItemStack(Material.DIAMOND_HELMET));
 			armorstand.setSmall(true);
 			armorstand.setVisible(false);
-			
 			break;
-			
 		case "sword":
-			
 			CustomItem customItem = new CustomItem(Material.WOODEN_SWORD);
 			customItem.setName("§6Schwert");
 			p.getInventory().addItem(customItem.getItem());
-			
-			
 			break;
-			
+		case "dsword":
+			CustomItem dItem = new CustomItem(Material.NETHERITE_SWORD);
+			dItem.setName("§4Excalibur");
+			p.getInventory().addItem(dItem.getItem());
+			break;
 		case "changeitem":
 			changeItemMeta(p.getInventory().getItemInMainHand());
+			break;
+		case "food":
+			p.setFoodLevel(1);
+			break;
+		case "reader":
 			
+			
+			
+			MemorySection sec = (MemorySection) FFA.worldData.getobject("warps");
 			break;
 		default:
 			return true;

@@ -7,7 +7,7 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
 
-import de.IDev.ifh.utils.CustomItem;
+import de.IDev.ifh.customs.CustomItem;
 
 public class AddItemXpEvent extends Event {
 
@@ -36,16 +36,9 @@ public class AddItemXpEvent extends Event {
 			item.setXp(newXp);
 			originalItem.setItemMeta(item.getItem().getItemMeta());
 		} else {
-			item.setXp(item.getMaxXp() - (item.getXp()+xp));
+			item.setXp((item.getXp()+xp) - item.getMaxXp());
 			originalItem.setItemMeta(item.getItem().getItemMeta());
 			Bukkit.getPluginManager().callEvent(new UpgradeItemEvent(originalItem, player, item.getLevel(), item.getLevel()+1));
-		}
-		
-		ItemStack cursor = p.getOpenInventory().getCursor();
-		if(cursor.getAmount() < 1) {
-			cursor.setType(Material.AIR);
-		} else {
-			cursor.setAmount(cursor.getAmount()-1);
 		}
 	}
 

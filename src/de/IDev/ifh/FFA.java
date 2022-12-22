@@ -11,16 +11,18 @@ import de.IDev.ifh.commands.Gamemode;
 import de.IDev.ifh.commands.Heal;
 import de.IDev.ifh.commands.Kill;
 import de.IDev.ifh.commands.SetSpawn;
+import de.IDev.ifh.commands.SetWarp;
 import de.IDev.ifh.commands.Spawn;
 import de.IDev.ifh.commands.Stats;
 import de.IDev.ifh.commands.Test;
-import de.IDev.ifh.customs.EnchantmentExecuter;
+import de.IDev.ifh.commands.Warp;
 import de.IDev.ifh.event.BlockBreak;
 import de.IDev.ifh.event.Bow;
 import de.IDev.ifh.event.Chat;
 import de.IDev.ifh.event.Damage;
 import de.IDev.ifh.event.Death;
 import de.IDev.ifh.event.Explosion;
+import de.IDev.ifh.event.Food;
 import de.IDev.ifh.event.ItemPickUp;
 import de.IDev.ifh.event.ItemUpgrade;
 import de.IDev.ifh.event.Join;
@@ -62,6 +64,8 @@ public class FFA extends JavaPlugin{
 		getCommand("gamemode").setExecutor(new Gamemode());
 		getCommand("spawn").setExecutor(new Spawn());
 		getCommand("test").setExecutor(new Test());
+		getCommand("warp").setExecutor(new Warp());
+		getCommand("setwarp").setExecutor(new SetWarp());
 		
 		//Register Listeners
 		PluginManager pm = Bukkit.getPluginManager();
@@ -76,8 +80,8 @@ public class FFA extends JavaPlugin{
 		pm.registerEvents(new BlockBreak(), this);
 		pm.registerEvents(new Bow(), this);
 		pm.registerEvents(new Explosion(), this);
-		pm.registerEvents(new EnchantmentExecuter(), this);
 		pm.registerEvents(new ItemUpgrade(), this);
+		pm.registerEvents(new Food(), this);
 		
 		for(Player p : Bukkit.getOnlinePlayers()) {
 			Object kills = playerData.getobject(p.getUniqueId() + ".kills");

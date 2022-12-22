@@ -17,3 +17,5 @@ commands:
       aliases: [gm]
    spawn:
    test:
+   warp:
+   setwarp:

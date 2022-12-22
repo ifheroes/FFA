@@ -7,7 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDropItemEvent;
 
-import de.IDev.ifh.utils.CustomItem;
+import de.IDev.ifh.customs.CustomItem;
 
 public class BlockBreak implements Listener{
 
