@@ -11,6 +11,8 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import de.IDev.ifh.FFA;
+
 public class CustomItem {
 
 	private static String custom = "custom";
@@ -32,7 +34,7 @@ public class CustomItem {
 		meta.setUnbreakable(true);
 
 		this.level = 0;
-		this.maxXp = 50;
+		this.maxXp = FFA.getMaxXPForLevel(0);
 		this.xp = 0;
 	}
 

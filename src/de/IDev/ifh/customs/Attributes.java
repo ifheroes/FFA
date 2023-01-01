@@ -46,17 +46,17 @@ public enum Attributes {
 	public static double getScaling(Attributes att) {
 		switch (att) {
 		case DAMAGE:
-			return 1.5;
+			return 4.5;
 		case ATTACK_SPEED:
-			return 0.75;
+			return 4.75;
 		case CRIT_CHANCE:
-			return 2.25;
+			return 3.25;
 		case SLOW:
 			return 1;
 		case SPEED:
 			return 1;
 		case PROTECTION:
-			return 1.5;
+			return 2.5;
 		case CRIT_DAMAGE:
 			return 5.25;
 		default:

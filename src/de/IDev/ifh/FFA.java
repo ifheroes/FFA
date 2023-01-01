@@ -29,6 +29,7 @@ import de.IDev.ifh.event.Join;
 import de.IDev.ifh.event.Leave;
 import de.IDev.ifh.event.Phsic;
 import de.IDev.ifh.event.Shovel;
+import de.IDev.ifh.utils.CombatLog;
 import de.IDev.ifh.utils.File;
 import de.IDev.ifh.utils.StatsData;
 import de.IDev.ifh.utils.TabList;
@@ -54,6 +55,8 @@ public class FFA extends JavaPlugin{
 		if (provider != null) {
 		    luckPermsApi = provider.getProvider();
 		}
+		
+		new CombatLog();
 		
 		//Register Commands
 		getCommand("stats").setExecutor(new Stats());
@@ -103,5 +106,9 @@ public class FFA extends JavaPlugin{
 		}
 		
 		super.onDisable();
+	}
+	
+	public static int getMaxXPForLevel(int currentlevel) {
+		return (int) ((Math.pow(currentlevel * 0.15, 2) + 20) * 10);
 	}
 }

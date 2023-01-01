@@ -12,14 +12,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import de.IDev.ifh.FFA;
+import de.IDev.ifh.utils.CombatLog;
 
 public class Spawn implements CommandExecutor {
 
-	public static List<String> combatLog;
-	
-	public Spawn() {
-		combatLog = new ArrayList<>();
-	}
+	public static List<Player> spawnDelay = new ArrayList<>();
 	
 	@Override
 	public boolean onCommand(CommandSender s, Command arg1, String arg2, String[] args) {
@@ -30,6 +27,9 @@ public class Spawn implements CommandExecutor {
 		}
 		Player p = (Player) s;
 		
+		if(spawnDelay.contains(p)) {
+			
+		}
 		if(args.length == 0 && p.getGameMode() == GameMode.CREATIVE) {
 			p.teleport(getSpawnLoc());
 			return true;	
@@ -43,18 +43,21 @@ public class Spawn implements CommandExecutor {
 			player.teleport(getSpawnLoc());
 			return true;
 		}
-		if(Spawn.combatLog.contains(p.getName())) {
-			p.sendMessage("§cDu bist momentan noch im CombatLog");
+		if(CombatLog.hasPlayer(p)) {
+			p.sendMessage("§cDu kannst momentan nicht teleportiert werden");
 			return true;
 		}
 		
 		p.sendMessage("§6Du wirst in §e3 Sekunden §6teleportiert");
+		spawnDelay.add(p);
 		Bukkit.getScheduler().runTaskLater(FFA.getPlugin(FFA.class), new Runnable() {
 			
 			@Override
 			public void run() {
-				if(combatLog.contains(p.getName())) return;
+				if(CombatLog.hasPlayer(p)) return;
+				if(!spawnDelay.contains(p)) return;
 				p.teleport(getSpawnLoc());
+				spawnDelay.remove(p);
 			}
 		}, 20*3L);
 		

@@ -12,6 +12,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.CreativeCategory;
 import org.bukkit.inventory.ItemStack;
 
+import de.IDev.ifh.FFA;
 import de.IDev.ifh.customs.Attributes;
 import de.IDev.ifh.customs.CustomItem;
 
@@ -40,7 +41,7 @@ public class UpgradeItemEvent extends Event {
 		this.newLevel = newLevel;
 
 		item.setLevel(item.getLevel() + 1);
-		item.setMaxXp((int) ((Math.pow(item.getLevel() * 0.15, 2) + 5) * 10));
+		item.setMaxXp(FFA.getMaxXPForLevel(item.getLevel()));
 		if (isWeapon(originalItem.getType())) {
 			List<Attributes> weaponatt = Attributes.getWeaponAttributes();
 			Attributes att = weaponatt.get(new Random().nextInt(weaponatt.size()));
@@ -70,11 +71,9 @@ public class UpgradeItemEvent extends Event {
 	public int getNewLevel() {
 		return this.newLevel;
 	}
-
+	
 	private boolean isWeapon(Material m) {
 		String mat = m.toString();
-		if (mat.contains("AXE") && !mat.contains("pick"))
-			return true;
 		if (m.getCreativeCategory() != CreativeCategory.COMBAT)
 			return false;
 		if (mat.contains("BOW"))

@@ -1,6 +1,5 @@
 package de.IDev.ifh.commands;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -12,7 +11,6 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.MemorySection;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
@@ -79,7 +77,7 @@ public class Test implements CommandExecutor {
 			break;
 		case "pickaxe":
 			CustomItem item = new CustomItem(Material.IRON_PICKAXE);
-			item.setName("§6Spitzhacke der Farmer");
+			item.setName("§6XXX");
 			item.addEnchants(Enchantment.DIG_SPEED, 10);
 			p.getInventory().addItem(item.getItem());
 			break;
@@ -154,10 +152,7 @@ public class Test implements CommandExecutor {
 			p.setFoodLevel(1);
 			break;
 		case "reader":
-			
-			
-			
-			MemorySection sec = (MemorySection) FFA.worldData.getobject("warps");
+		//	MemorySection sec = (MemorySection) FFA.worldData.getobject("warps");
 			break;
 		default:
 			return true;

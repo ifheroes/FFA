@@ -5,7 +5,6 @@ import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockDropItemEvent;
 
 import de.IDev.ifh.customs.CustomItem;
 
