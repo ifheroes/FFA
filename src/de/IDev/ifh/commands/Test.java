@@ -24,6 +24,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import de.IDev.ifh.FFA;
+import de.IDev.ifh.customs.Boss;
 import de.IDev.ifh.customs.CustomItem;
 
 public class Test implements CommandExecutor {
@@ -76,7 +77,7 @@ public class Test implements CommandExecutor {
 			spawnFallingBlock(p.getLocation().clone().add(0, -0.1, 0), bd);
 			break;
 		case "pickaxe":
-			CustomItem item = new CustomItem(Material.IRON_PICKAXE);
+			CustomItem item = new CustomItem(Material.IRON_PICKAXE, false, 0);
 			item.setName("§6XXX");
 			item.addEnchants(Enchantment.DIG_SPEED, 10);
 			p.getInventory().addItem(item.getItem());
@@ -97,19 +98,19 @@ public class Test implements CommandExecutor {
 			
 			break;
 		case "armor":
-			CustomItem helm = new CustomItem(Material.NETHERITE_HELMET);
+			CustomItem helm = new CustomItem(Material.NETHERITE_HELMET, true, 25);
 			helm.setName("Strong Helmet");
 			helm.addEnchants(Enchantment.PROTECTION_ENVIRONMENTAL, 10);
 			
-			CustomItem chest = new CustomItem(Material.NETHERITE_CHESTPLATE);
+			CustomItem chest = new CustomItem(Material.NETHERITE_CHESTPLATE, true, 25);
 			chest.setName("Strong Chestplate");
 			chest.addEnchants(Enchantment.PROTECTION_ENVIRONMENTAL, 10);
 			
-			CustomItem legs = new CustomItem(Material.NETHERITE_LEGGINGS);
+			CustomItem legs = new CustomItem(Material.NETHERITE_LEGGINGS, true, 25);
 			legs.setName("Strong Leggings");
 			legs.addEnchants(Enchantment.PROTECTION_ENVIRONMENTAL, 10);
 			
-			CustomItem boots = new CustomItem(Material.NETHERITE_BOOTS);
+			CustomItem boots = new CustomItem(Material.NETHERITE_BOOTS, true, 25);
 			boots.setName("Strong Boots");
 			boots.addEnchants(Enchantment.PROTECTION_ENVIRONMENTAL, 10);
 			
@@ -119,12 +120,12 @@ public class Test implements CommandExecutor {
 			p.getInventory().addItem(boots.getItem());
 			break;
 		case "ultrabow":
-			CustomItem b = new CustomItem(Material.BOW);
+			CustomItem b = new CustomItem(Material.BOW, false, 25);
 			b.setName("§bUltra Bow");
 			p.getInventory().addItem(b.getItem());
 			break;
 		case "expobow":
-			CustomItem b1 = new CustomItem(Material.BOW);
+			CustomItem b1 = new CustomItem(Material.BOW, false, 25);
 			b1.setName("§cExplosive Bow");
 			p.getInventory().addItem(b1.getItem());
 			break;
@@ -136,12 +137,12 @@ public class Test implements CommandExecutor {
 			armorstand.setVisible(false);
 			break;
 		case "sword":
-			CustomItem customItem = new CustomItem(Material.WOODEN_SWORD);
+			CustomItem customItem = new CustomItem(Material.WOODEN_SWORD, true, 25);
 			customItem.setName("§6Schwert");
 			p.getInventory().addItem(customItem.getItem());
 			break;
 		case "dsword":
-			CustomItem dItem = new CustomItem(Material.NETHERITE_SWORD);
+			CustomItem dItem = new CustomItem(Material.NETHERITE_SWORD, true, 25);
 			dItem.setName("§4Excalibur");
 			p.getInventory().addItem(dItem.getItem());
 			break;
@@ -151,9 +152,9 @@ public class Test implements CommandExecutor {
 		case "food":
 			p.setFoodLevel(1);
 			break;
-		case "reader":
-		//	MemorySection sec = (MemorySection) FFA.worldData.getobject("warps");
-			break;
+		case "boss":
+			Boss boss = new Boss(p.getLocation());
+			boss.spawnBoss();
 		default:
 			return true;
 		}

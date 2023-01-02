@@ -12,24 +12,28 @@ import org.bukkit.inventory.ItemStack;
 import de.IDev.ifh.customs.CustomItem;
 import de.IDev.ifh.customs.events.AddItemXpEvent;
 
-public class ItemUpgrade implements Listener {
-	
+public class ClickItem implements Listener {
+
 	@EventHandler
 	public void a(InventoryClickEvent e) {
 		int xp = 10;
-		
+
 		if (e.getCursor() == null)
 			return;
 		if (e.getCurrentItem() == null)
 			return;
 		if (!CustomItem.isCustom(e.getCurrentItem()))
 			return;
+		if (!CustomItem.isUpgradable(e.getCurrentItem()))
+			return;
 		ItemStack cursor = e.getCursor();
 		ItemStack slot = e.getCurrentItem();
+		if (new CustomItem(slot).isMaxLevel())
+			return;
 
 		if (!e.getCursor().hasItemMeta())
 			return;
-		if (!e.getCursor().getType().toString().contains("IRON"))
+		if (e.getCursor().getType() != Material.IRON_INGOT)
 			return;
 
 		if (e.getClick() == ClickType.LEFT) {
@@ -41,9 +45,7 @@ public class ItemUpgrade implements Listener {
 		} else {
 			cursor.setAmount(cursor.getAmount() - 1);
 		}
-
 		Bukkit.getPluginManager().callEvent(new AddItemXpEvent(slot, (Player) e.getWhoClicked(), xp));
-
 		e.setCancelled(true);
 	}
 }

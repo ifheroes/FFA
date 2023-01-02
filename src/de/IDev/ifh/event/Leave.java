@@ -8,6 +8,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scoreboard.Team;
 
 import de.IDev.ifh.FFA;
+import de.IDev.ifh.utils.CombatLog;
 import de.IDev.ifh.utils.StatsData;
 import net.luckperms.api.model.user.User;
 
@@ -18,6 +19,10 @@ public class Leave implements Listener{
 	public void a(PlayerQuitEvent e) {
 		Player p = e.getPlayer();
 		e.setQuitMessage("§7› "+p.getName()+" hat das Spiel verlassen");
+		
+		if(CombatLog.hasPlayer(p)) {
+			p.setHealth(0);
+		}
 		
 		StatsData d = StatsData.playerStats.get(p);
 		FFA.playerData.set(p.getUniqueId() + ".kills", d.getKills());

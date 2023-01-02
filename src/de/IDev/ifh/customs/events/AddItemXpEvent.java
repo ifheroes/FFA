@@ -1,7 +1,6 @@
 package de.IDev.ifh.customs.events;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -29,6 +28,7 @@ public class AddItemXpEvent extends Event {
 
 	public AddItemXpEvent(ItemStack originalItem, Player p, int xp) {
 		this.item = new CustomItem(originalItem);
+		if(item.isMaxLevel()) return;
 		this.player = p;
 		this.xp = xp;
 		this.newXp = item.getXp()+xp;

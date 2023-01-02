@@ -42,16 +42,23 @@ public class UpgradeItemEvent extends Event {
 
 		item.setLevel(item.getLevel() + 1);
 		item.setMaxXp(FFA.getMaxXPForLevel(item.getLevel()));
-		if (isWeapon(originalItem.getType())) {
-			List<Attributes> weaponatt = Attributes.getWeaponAttributes();
-			Attributes att = weaponatt.get(new Random().nextInt(weaponatt.size()));
+		Material type = originalItem.getType();
+		if (isWeapon(type)) {
+			List<Attributes> attributes = Attributes.getWeaponAttributes();
+			Attributes att = attributes.get(new Random().nextInt(attributes.size()));
+			double scaling = Attributes.getScaling(att);
+			item.setAttribute(att, item.getAttributeValue(att) + scaling);
+		}
+		if(isArmor(type)) {
+			List<Attributes> attributes = Attributes.getArmorAttributes();
+			Attributes att = attributes.get(new Random().nextInt(attributes.size()));
 			double scaling = Attributes.getScaling(att);
 			item.setAttribute(att, item.getAttributeValue(att) + scaling);
 		}
 		originalItem.setItemMeta(item.getItem().getItemMeta());
 		if(item.getXp() >= item.getMaxXp()) {
 			item.setXp(item.getXp()-item.getMaxXp());
-			Bukkit.getPluginManager().callEvent(new UpgradeItemEvent(originalItem, p, level, newLevel));
+			Bukkit.getPluginManager().callEvent(new UpgradeItemEvent(item.getItem(), p, level, newLevel));
 		}
 		p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
 	}
@@ -83,6 +90,21 @@ public class UpgradeItemEvent extends Event {
 		if (mat.contains("TRIDENT"))
 			return true;
 		if (mat.contains("CROSSBOW"))
+			return true;
+		return false;
+	}
+	
+	private boolean isArmor(Material m) {
+		String mat = m.toString();
+		if (m.getCreativeCategory() != CreativeCategory.COMBAT)
+			return false;
+		if (mat.contains("HELMET"))
+			return true;
+		if (mat.contains("CHESTPLATE"))
+			return true;
+		if (mat.contains("LEGGINGS"))
+			return true;
+		if (mat.contains("BOOTS"))
 			return true;
 		return false;
 	}

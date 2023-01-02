@@ -16,7 +16,7 @@ public class BlockBreak implements Listener{
 		if(e.getPlayer().getGameMode() != GameMode.SURVIVAL) return;
 		e.setCancelled(true);
 		if(e.getBlock().getType() == Material.IRON_ORE) {
-			CustomItem ingot = new CustomItem(Material.IRON_INGOT);
+			CustomItem ingot = new CustomItem(Material.IRON_INGOT, false, 0);
 			ingot.setName("§bEisen");
 			e.getPlayer().getInventory().addItem(ingot.getItem());
 		}

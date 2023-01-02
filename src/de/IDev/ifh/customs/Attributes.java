@@ -1,27 +1,18 @@
 package de.IDev.ifh.customs;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public enum Attributes {
 
-	DAMAGE, ATTACK_SPEED, CRIT_CHANCE, CRIT_DAMAGE, SLOW, SPEED, PROTECTION;
+	DAMAGE, ATTACK_SPEED, CRIT_CHANCE, CRIT_DAMAGE, SLOW, PROTECTION;
 
 	public static List<Attributes> getWeaponAttributes() {
-		List<Attributes> a = new ArrayList<>();
-		a.add(DAMAGE);
-		a.add(ATTACK_SPEED);
-		a.add(CRIT_CHANCE);
-		a.add(SLOW);
-		a.add(CRIT_DAMAGE);
-		return a;
+		return Arrays.asList(DAMAGE, ATTACK_SPEED, CRIT_CHANCE, CRIT_DAMAGE, SLOW);
 	}
 
 	public static List<Attributes> getArmorAttributes() {
-		List<Attributes> a = new ArrayList<>();
-		a.add(PROTECTION);
-		a.add(SPEED);
-		return a;
+		return Arrays.asList(PROTECTION);
 	}
 
 	public static String getName(Attributes attribute) {
@@ -52,8 +43,6 @@ public enum Attributes {
 		case CRIT_CHANCE:
 			return 3.25;
 		case SLOW:
-			return 1;
-		case SPEED:
 			return 1;
 		case PROTECTION:
 			return 2.5;

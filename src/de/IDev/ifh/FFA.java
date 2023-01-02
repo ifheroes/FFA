@@ -10,13 +10,16 @@ import de.IDev.ifh.commands.DeleteMessage;
 import de.IDev.ifh.commands.Gamemode;
 import de.IDev.ifh.commands.Heal;
 import de.IDev.ifh.commands.Kill;
+import de.IDev.ifh.commands.SetBossSpawn;
 import de.IDev.ifh.commands.SetSpawn;
 import de.IDev.ifh.commands.SetWarp;
 import de.IDev.ifh.commands.Spawn;
 import de.IDev.ifh.commands.Stats;
 import de.IDev.ifh.commands.Test;
 import de.IDev.ifh.commands.Warp;
+import de.IDev.ifh.customs.BossHandler;
 import de.IDev.ifh.event.BlockBreak;
+import de.IDev.ifh.event.BlockPlace;
 import de.IDev.ifh.event.Bow;
 import de.IDev.ifh.event.Chat;
 import de.IDev.ifh.event.Damage;
@@ -24,7 +27,7 @@ import de.IDev.ifh.event.Death;
 import de.IDev.ifh.event.Explosion;
 import de.IDev.ifh.event.Food;
 import de.IDev.ifh.event.ItemPickUp;
-import de.IDev.ifh.event.ItemUpgrade;
+import de.IDev.ifh.event.ClickItem;
 import de.IDev.ifh.event.Join;
 import de.IDev.ifh.event.Leave;
 import de.IDev.ifh.event.Phsic;
@@ -57,6 +60,7 @@ public class FFA extends JavaPlugin{
 		}
 		
 		new CombatLog();
+		new BossHandler();
 		
 		//Register Commands
 		getCommand("stats").setExecutor(new Stats());
@@ -69,6 +73,7 @@ public class FFA extends JavaPlugin{
 		getCommand("test").setExecutor(new Test());
 		getCommand("warp").setExecutor(new Warp());
 		getCommand("setwarp").setExecutor(new SetWarp());
+		getCommand("setbossspawn").setExecutor(new SetBossSpawn());
 		
 		//Register Listeners
 		PluginManager pm = Bukkit.getPluginManager();
@@ -83,8 +88,9 @@ public class FFA extends JavaPlugin{
 		pm.registerEvents(new BlockBreak(), this);
 		pm.registerEvents(new Bow(), this);
 		pm.registerEvents(new Explosion(), this);
-		pm.registerEvents(new ItemUpgrade(), this);
+		pm.registerEvents(new ClickItem(), this);
 		pm.registerEvents(new Food(), this);
+		pm.registerEvents(new BlockPlace(), this);
 		
 		for(Player p : Bukkit.getOnlinePlayers()) {
 			Object kills = playerData.getobject(p.getUniqueId() + ".kills");

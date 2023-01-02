@@ -1,6 +1,7 @@
 package de.IDev.ifh.event;
 
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
@@ -46,6 +47,9 @@ public class Damage implements Listener {
 		}
 		
 		
+		/*
+		 * Weapons
+		 */
 		ItemStack i = one.getInventory().getItemInMainHand();
 		CustomItem weapon = new CustomItem(i);
 		/*
@@ -53,6 +57,7 @@ public class Damage implements Listener {
 		 */
 		double damage = weapon.getAttributeValue(Attributes.DAMAGE);
 		e.setDamage(e.getDamage() * (1 + (damage / 100)));
+		
 		/*
 		 * AttackSpeed
 		 */
@@ -64,6 +69,7 @@ public class Damage implements Listener {
 				hitCooldown.remove(one.getName());
 			}
 		}, ticksForNextAttack);
+		
 		/*
 		 * CritChance and CritDamage
 		 */
@@ -74,8 +80,39 @@ public class Damage implements Listener {
 			double critdamage = weapon.getAttributeValue(Attributes.DAMAGE)/100;
 			e.setDamage(e.getDamage() * (1.5+critdamage));
 			one.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§c§oCRIT"));
+			Bukkit.getScheduler().runTaskLater(FFA.getPlugin(FFA.class), new Runnable() {
+				@Override
+				public void run() {
+					one.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(""));
+				}
+			}, 10L);
 		}
 		
+		/*
+		 * ARMOR
+		 */
+		
+		if(!(two instanceof Player)) {
+			return;
+		}
+		
+		Player target = (Player) two;
+		HashMap<Attributes, Double> armorStats = new HashMap<>();
+		for(ItemStack s : target.getInventory().getArmorContents()) {
+			if(s == null) continue;
+			CustomItem piece = new CustomItem(s);
+			for(Entry<Attributes, Double> entry : piece.getAttributes().entrySet()) {
+				double value = armorStats.get(entry.getKey()) == null ? 0 : armorStats.get(entry.getKey());
+				value += entry.getValue();
+				armorStats.put(entry.getKey(), value);
+			}
+		}
+		/*
+		 * Protection
+		 */
+		double protection = armorStats.get(Attributes.PROTECTION) == null ? 0 : armorStats.get(Attributes.PROTECTION);
+		System.out.println(protection + " "+ e.getDamage());
+		e.setDamage(e.getDamage() - (e.getDamage() * (protection / 100)));
 		System.out.println(e.getDamage());
 	}
 
