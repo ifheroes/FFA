@@ -24,7 +24,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import de.IDev.ifh.FFA;
-import de.IDev.ifh.customs.Boss;
+import de.IDev.ifh.boss.BossHandler;
+import de.IDev.ifh.boss.bosses.ZombieBoss;
 import de.IDev.ifh.customs.CustomItem;
 
 public class Test implements CommandExecutor {
@@ -153,8 +154,7 @@ public class Test implements CommandExecutor {
 			p.setFoodLevel(1);
 			break;
 		case "boss":
-			Boss boss = new Boss(p.getLocation());
-			boss.spawnBoss();
+			 BossHandler.createBoss(p.getLocation());
 		default:
 			return true;
 		}

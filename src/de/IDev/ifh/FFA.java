@@ -6,6 +6,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import de.IDev.ifh.boss.BossHandler;
 import de.IDev.ifh.commands.DeleteMessage;
 import de.IDev.ifh.commands.Gamemode;
 import de.IDev.ifh.commands.Heal;
@@ -17,7 +18,6 @@ import de.IDev.ifh.commands.Spawn;
 import de.IDev.ifh.commands.Stats;
 import de.IDev.ifh.commands.Test;
 import de.IDev.ifh.commands.Warp;
-import de.IDev.ifh.customs.BossHandler;
 import de.IDev.ifh.event.BlockBreak;
 import de.IDev.ifh.event.BlockPlace;
 import de.IDev.ifh.event.Bow;
