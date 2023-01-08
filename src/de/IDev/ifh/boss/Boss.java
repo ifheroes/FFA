@@ -1,10 +1,11 @@
 package de.IDev.ifh.boss;
 
 import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_19_R2.entity.CraftEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+
+import net.minecraft.world.entity.EntityInsentient;
 
 public class Boss implements IBoss{
 
@@ -13,29 +14,42 @@ public class Boss implements IBoss{
 	private double health;
 	private double maxHealth;
 	private double armor;
+	private double visRange;
 	
 	public Boss(BossType type) {
 		this.bosstype = type;
 	}
 	
+	public Boss(Entity en) {
+		bosstype = BossType.getBossType(en.getType());
+		entity = (LivingEntity) en;
+	
+		//Init all stats
+		
+	}
+	
 	@Override
 	public void spawnBoss(Location loc) {
 		entity = (LivingEntity) loc.getWorld().spawnEntity(loc, BossType.getEntityType(bosstype));
-		entity.setAI(false);
+		entity.setAI(true);
 		entity.setRemoveWhenFarAway(false);
-		entity.setSilent(false);
+		entity.setSilent(true);
 		entity.addScoreboardTag(BOSS);
 		entity.setMaximumNoDamageTicks(0);
 	}
 
 	@Override
-	public void moveTo(Location loc) {
-		// TODO Pathfinder...	
+	public void moveTo(Location loc, double speed) {
+		((EntityInsentient) ((CraftEntity) entity).getHandle()).E().a(loc.getX(), loc.getY(),
+				loc.getZ(), speed);
 	}
 
 	@Override
 	public void attack(Entity en, double damage) {
-		en.setLastDamageCause(new EntityDamageEvent(en, DamageCause.CUSTOM, damage));
+		if(en instanceof LivingEntity) {
+			((LivingEntity) en).damage(damage, entity);
+			entity.swingMainHand();
+		}
 	}
 
 	@Override
@@ -82,5 +96,17 @@ public class Boss implements IBoss{
 	public boolean isAlive() {
 		if(entity == null) return false;
 		return !entity.isDead();
+	}
+
+	public double getVisRange() {
+		return visRange;
+	}
+
+	public void setVisRange(double visRange) {
+		this.visRange = visRange;
+	}
+	
+	public Entity getEntity() {
+		return this.entity;
 	}
 }

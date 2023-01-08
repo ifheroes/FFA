@@ -26,7 +26,7 @@ public class TabList {
 					
 					p.setPlayerListName(prefix + p.getDisplayName());
 					p.setPlayerListHeader("\nßbßlInfinityHeroes.de\n");
-					p.setPlayerListFooter("\nß7  Wir sind auch auf Discord  \nViel Spaﬂ beim Spielen \n");
+					p.setPlayerListFooter("\nß7  Wir sind auch auf Discord  \nViel Spaﬂ beim spielen \n");
 					
 					int weight = user.getCachedData().getMetaData().getWeight();
 					

@@ -2,6 +2,7 @@ package de.IDev.ifh.customs.events;
 
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -81,8 +82,10 @@ public class UpgradeItemEvent extends Event {
 	
 	private boolean isWeapon(Material m) {
 		String mat = m.toString();
-		if (m.getCreativeCategory() != CreativeCategory.COMBAT)
-			return false;
+		
+		/*
+		 * CreativeCategory doesn't work with Paper - only in Spigot
+		 */
 		if (mat.contains("BOW"))
 			return true;
 		if (mat.contains("SWORD"))
@@ -96,8 +99,6 @@ public class UpgradeItemEvent extends Event {
 	
 	private boolean isArmor(Material m) {
 		String mat = m.toString();
-		if (m.getCreativeCategory() != CreativeCategory.COMBAT)
-			return false;
 		if (mat.contains("HELMET"))
 			return true;
 		if (mat.contains("CHESTPLATE"))

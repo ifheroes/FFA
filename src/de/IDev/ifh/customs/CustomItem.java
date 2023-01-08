@@ -53,6 +53,7 @@ public class CustomItem {
 		 * Set Attributes, Level, XP
 		 */
 		if (isCustom(item)) {
+			if (isUpgradable(item)) {
 			ArrayList<String> lore = (ArrayList<String>) meta.getLore();
 			this.level = Integer.parseInt(lore.get(0).split(" ")[1].split("/")[0]);
 			this.maxLevel = Integer.parseInt(lore.get(0).split(" ")[1].split("/")[1]);
@@ -63,7 +64,6 @@ public class CustomItem {
 				this.maxXp = 10000;
 				this.xp = 0;
 			}
-			if (isUpgradable(item)) {
 				this.upgrade = true;
 				if (lore.size() < 3)
 					return;
@@ -161,6 +161,10 @@ public class CustomItem {
 		return this.level == this.maxLevel;
 	}
 
+	public String getName() {
+		return this.meta.getDisplayName();
+	}
+	
 	public static boolean isUpgradable(ItemStack itemStack) {
 		if (itemStack == null)
 			return false;

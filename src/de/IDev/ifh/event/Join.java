@@ -21,15 +21,30 @@ public class Join implements Listener {
 		Player p = e.getPlayer();
 		p.teleport(getSpawnLoc() != null ? getSpawnLoc() : p.getLocation());
 		p.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(100);
-		e.setJoinMessage("§7› "+p.getName()+" hat das Spiel betreten");
-		
+		e.setJoinMessage("§7› " + p.getName() + " hat das Spiel betreten");
+
 		p.setMaximumNoDamageTicks(0);
-		
+
 		Object kills = FFA.playerData.getobject(p.getUniqueId() + ".kills");
 		Object deaths = FFA.playerData.getobject(p.getUniqueId() + ".deaths");
 		new StatsData(p, (int) (deaths != null ? deaths : 0), (int) (kills != null ? kills : 0));
-		
-//		if(p.hasPlayedBefore()) return;
+
+		CustomItem apple = new CustomItem(Material.GOLDEN_APPLE, false, 0);
+		apple.setName("§6Heilung");
+		if (!p.getInventory().contains(Material.GOLDEN_APPLE)) {
+			p.getInventory().addItem(apple.getItem());
+		}
+
+		for (ItemStack stack : p.getInventory().getContents()) {
+			if (stack == null)
+				continue;
+			if (CustomItem.isCustom(stack))
+				continue;
+			p.getInventory().remove(stack);
+		}
+
+		if (p.hasPlayedBefore())
+			return;
 		p.getInventory().clear();
 		CustomItem sword = new CustomItem(Material.STONE_SWORD, true, 25);
 		sword.setName("§6Schwert");
@@ -41,25 +56,23 @@ public class Join implements Listener {
 		leggings.setName("§6Hose");
 		CustomItem boots = new CustomItem(Material.IRON_BOOTS, true, 25);
 		boots.setName("§6Schuhe");
-		//Upgradle later
+		// Upgradle later
 		CustomItem pickaxe = new CustomItem(Material.STONE_PICKAXE, false, 0);
 		pickaxe.setName("§6Spitzhacke");
-		CustomItem apple = new CustomItem(Material.GOLDEN_APPLE, false, 0);
-		apple.setName("§6Heilung");
-		
+
 		p.getInventory().addItem(sword.getItem());
 		p.getInventory().addItem(pickaxe.getItem());
 		p.getInventory().addItem(apple.getItem());
-		p.getInventory().setArmorContents(new ItemStack[] {boots.getItem(), leggings.getItem(), chestplate.getItem(), helmet.getItem()});
+		p.getInventory().setArmorContents(
+				new ItemStack[] { boots.getItem(), leggings.getItem(), chestplate.getItem(), helmet.getItem() });
 	}
-	
-	
+
 	public Location getSpawnLoc() {
 		String world = (String) FFA.worldData.getobject("spawn.world");
 		double x = (double) FFA.worldData.getobject("spawn.x");
 		double y = (double) FFA.worldData.getobject("spawn.y");
 		double z = (double) FFA.worldData.getobject("spawn.z");
-		double yaw = Double.parseDouble(FFA.worldData.getobject("spawn.yaw")+"");
+		double yaw = Double.parseDouble(FFA.worldData.getobject("spawn.yaw") + "");
 		int pitch = (int) FFA.worldData.getobject("spawn.pitch");
 		return new Location(Bukkit.getWorld(world), x, y, z, (float) yaw, pitch);
 	}

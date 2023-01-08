@@ -25,6 +25,7 @@ import org.bukkit.util.Vector;
 
 import de.IDev.ifh.FFA;
 import de.IDev.ifh.boss.BossHandler;
+import de.IDev.ifh.boss.BossType;
 import de.IDev.ifh.boss.bosses.ZombieBoss;
 import de.IDev.ifh.customs.CustomItem;
 
@@ -154,7 +155,14 @@ public class Test implements CommandExecutor {
 			p.setFoodLevel(1);
 			break;
 		case "boss":
-			 BossHandler.createBoss(p.getLocation());
+			BossHandler.createBoss(p.getLocation(), BossType.BLAZE);
+			break;
+		case "attack":
+			BossHandler.getBoss().attack(p, 5);
+			break;
+		case "move":
+			BossHandler.getBoss().moveTo(p.getLocation(), 2);
+			break;
 		default:
 			return true;
 		}

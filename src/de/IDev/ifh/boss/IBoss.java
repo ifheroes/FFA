@@ -12,7 +12,7 @@ public interface IBoss {
 	public List<Attacks> attacks = new ArrayList<>();
 
 	public void spawnBoss(Location loc);
-	public void moveTo(Location loc);
+	public void moveTo(Location loc, double speed);
 	public void attack(Entity en, double damage);
 	
 	public void setType(BossType type);

@@ -35,6 +35,7 @@ public class Death implements Listener {
 		
 		Location loc = p.getLocation();
 		p.getWorld().spawnParticle(Particle.BUBBLE_POP, loc.add(0, 1, 0), 100);
+		killer.setHealth(killer.getHealth()+10);
 	}
 	
 	@EventHandler

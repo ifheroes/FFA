@@ -35,7 +35,9 @@ public class Damage implements Listener {
 		/*
 		 * CombatLog and hitCoolDown
 		 */
-		CombatLog.addPlayer(one, 20 * 3);
+		CombatLog.addPlayer(one, 20*5);
+		
+		
 		if (two instanceof Player) {
 			CombatLog.addPlayer((Player) two, 20 * 3);
 			

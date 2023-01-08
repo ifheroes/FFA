@@ -23,5 +23,23 @@ public enum BossType {
 		}
 	}
 	
+	public static BossType getBossType(EntityType type) {
+		switch (type) {
+		case ZOMBIE:
+			return ZOMBIE;
+		case PIGLIN_BRUTE:
+			return PIGLIN;
+		case BLAZE:
+			return BLAZE;
+		case IRON_GOLEM:
+			return GOLEM;
+		case WOLF:
+			return WOLF;
+		default:
+			System.out.println("[Error] Illegal EntityType has been initalized: default = Zombie");
+			return ZOMBIE;
+		}
+	}
+	
 	
 }

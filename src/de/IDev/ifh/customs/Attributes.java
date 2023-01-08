@@ -5,10 +5,10 @@ import java.util.List;
 
 public enum Attributes {
 
-	DAMAGE, ATTACK_SPEED, CRIT_CHANCE, CRIT_DAMAGE, SLOW, PROTECTION;
+	DAMAGE, ATTACK_SPEED, CRIT_CHANCE, CRIT_DAMAGE, PROTECTION;
 
 	public static List<Attributes> getWeaponAttributes() {
-		return Arrays.asList(DAMAGE, ATTACK_SPEED, CRIT_CHANCE, CRIT_DAMAGE, SLOW);
+		return Arrays.asList(DAMAGE, ATTACK_SPEED, CRIT_CHANCE, CRIT_DAMAGE);
 	}
 
 	public static List<Attributes> getArmorAttributes() {
@@ -42,8 +42,6 @@ public enum Attributes {
 			return 4.75;
 		case CRIT_CHANCE:
 			return 3.25;
-		case SLOW:
-			return 1;
 		case PROTECTION:
 			return 2.5;
 		case CRIT_DAMAGE:

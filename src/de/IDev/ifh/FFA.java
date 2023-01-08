@@ -26,6 +26,7 @@ import de.IDev.ifh.event.Damage;
 import de.IDev.ifh.event.Death;
 import de.IDev.ifh.event.Explosion;
 import de.IDev.ifh.event.Food;
+import de.IDev.ifh.event.ItemInteract;
 import de.IDev.ifh.event.ItemPickUp;
 import de.IDev.ifh.event.ClickItem;
 import de.IDev.ifh.event.Join;
@@ -91,6 +92,7 @@ public class FFA extends JavaPlugin{
 		pm.registerEvents(new ClickItem(), this);
 		pm.registerEvents(new Food(), this);
 		pm.registerEvents(new BlockPlace(), this);
+		pm.registerEvents(new ItemInteract(), this);
 		
 		for(Player p : Bukkit.getOnlinePlayers()) {
 			Object kills = playerData.getobject(p.getUniqueId() + ".kills");

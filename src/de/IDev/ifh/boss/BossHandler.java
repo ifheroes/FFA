@@ -6,35 +6,35 @@ import org.bukkit.World;
 import org.bukkit.entity.Entity;
 
 import de.IDev.ifh.FFA;
-import de.IDev.ifh.boss.bosses.ZombieBoss;
+import de.IDev.ifh.boss.bosses.BlazeBoss;
 
 public class BossHandler {
 
-	private static ZombieBoss boss;
+	private static Boss boss;
 	
 	public BossHandler() {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(FFA.getPlugin(FFA.class), new Runnable() {
 			
 			@Override
 			public void run() {
-				if(boss != null) return;
+				if(boss != null && boss.isAlive()) return;
 				for(World w : Bukkit.getWorlds()) {
 					for(Entity e : w.getEntities()) {
 						if(!e.getScoreboardTags().contains(IBoss.BOSS)) continue;
-						boss = new ZombieBoss(BossType.ZOMBIE);
-						System.out.println("yes");
+						boss = new Boss(e);
 					}
 				}
 			}
-		}, 20L, 20*30L);
+		}, 20L, 20*10L);
 	}
 	
-	public static ZombieBoss getBoss() {
+	public static Boss getBoss() {
 		return boss;
 	}
 
-	public static void createBoss(Location loc) {
-		ZombieBoss boss = new ZombieBoss(BossType.ZOMBIE);
-		boss.spawnBoss(loc);
+	public static void createBoss(Location loc, BossType type) {
+		BlazeBoss zboss = new BlazeBoss(type);
+		zboss.spawnBoss(loc);
+		boss = zboss;
 	}
 }

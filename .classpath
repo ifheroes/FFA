@@ -6,7 +6,8 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/DeadC/OneDrive/Dokumente/API/spigot-api-1.19.2-R0.1-SNAPSHOT-shaded.jar"/>
 	<classpathentry kind="lib" path="C:/Users/DeadC/OneDrive/Dokumente/API/LuckPerms-Bukkit-5.4.55.jar"/>
+	<classpathentry kind="lib" path="C:/Users/DeadC/OneDrive/Dokumente/API/spigot-1.19.3-R0.1-PACKAGES.jar"/>
+	<classpathentry kind="lib" path="C:/Users/DeadC/OneDrive/Dokumente/API/spigot-api-1.19.3-R0.1-SNAPSHOT-shaded.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
