@@ -6,7 +6,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Entity;
 
 import de.IDev.ifh.FFA;
-import de.IDev.ifh.boss.bosses.BlazeBoss;
+import de.IDev.ifh.boss.bosses.ZombieBoss;
 
 public class BossHandler {
 
@@ -33,7 +33,7 @@ public class BossHandler {
 	}
 
 	public static void createBoss(Location loc, BossType type) {
-		BlazeBoss zboss = new BlazeBoss(type);
+		ZombieBoss zboss = new ZombieBoss(type);
 		zboss.spawnBoss(loc);
 		boss = zboss;
 	}

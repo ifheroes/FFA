@@ -109,4 +109,8 @@ public class Boss implements IBoss{
 	public Entity getEntity() {
 		return this.entity;
 	}
+	
+	public static boolean isBoss(Entity e) {
+		return e.getScoreboardTags().contains(BOSS);
+	}
 }

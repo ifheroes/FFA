@@ -155,7 +155,7 @@ public class Test implements CommandExecutor {
 			p.setFoodLevel(1);
 			break;
 		case "boss":
-			BossHandler.createBoss(p.getLocation(), BossType.BLAZE);
+			BossHandler.createBoss(p.getLocation(), BossType.PIG);
 			break;
 		case "attack":
 			BossHandler.getBoss().attack(p, 5);

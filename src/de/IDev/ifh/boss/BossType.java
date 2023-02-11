@@ -4,7 +4,7 @@ import org.bukkit.entity.EntityType;
 
 public enum BossType {
 
-	ZOMBIE, PIGLIN, BLAZE, GOLEM, WOLF;
+	ZOMBIE, PIGLIN, BLAZE, GOLEM, WOLF, PIG;
 	
 	public static EntityType getEntityType(BossType type) {
 		switch (type) {
@@ -18,6 +18,8 @@ public enum BossType {
 			return EntityType.IRON_GOLEM;
 		case WOLF:
 			return EntityType.WOLF;
+		case PIG:
+			return EntityType.PIG;
 		default:
 			return null;
 		}
@@ -35,6 +37,8 @@ public enum BossType {
 			return GOLEM;
 		case WOLF:
 			return WOLF;
+		case PIG:
+			return PIG;
 		default:
 			System.out.println("[Error] Illegal EntityType has been initalized: default = Zombie");
 			return ZOMBIE;

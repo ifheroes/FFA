@@ -7,6 +7,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import de.IDev.ifh.boss.BossHandler;
+import de.IDev.ifh.boss.events.EntityCompust;
 import de.IDev.ifh.commands.DeleteMessage;
 import de.IDev.ifh.commands.Gamemode;
 import de.IDev.ifh.commands.Heal;
@@ -93,6 +94,8 @@ public class FFA extends JavaPlugin{
 		pm.registerEvents(new Food(), this);
 		pm.registerEvents(new BlockPlace(), this);
 		pm.registerEvents(new ItemInteract(), this);
+		
+		pm.registerEvents(new EntityCompust(), this);
 		
 		for(Player p : Bukkit.getOnlinePlayers()) {
 			Object kills = playerData.getobject(p.getUniqueId() + ".kills");

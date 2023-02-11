@@ -11,10 +11,13 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
 import de.IDev.ifh.FFA;
+import de.IDev.ifh.customs.events.AddItemXpEvent;
 import de.IDev.ifh.utils.StatsData;
 
 public class Death implements Listener {
 
+	private int xpForKill = 5;
+	
 	@EventHandler
 	public void a(PlayerDeathEvent e) {
 		e.setKeepInventory(true);
@@ -36,6 +39,8 @@ public class Death implements Listener {
 		Location loc = p.getLocation();
 		p.getWorld().spawnParticle(Particle.BUBBLE_POP, loc.add(0, 1, 0), 100);
 		killer.setHealth(killer.getHealth()+10);
+		
+		Bukkit.getPluginManager().callEvent(new AddItemXpEvent(p.getInventory().getItemInMainHand(), p, xpForKill));
 	}
 	
 	@EventHandler
