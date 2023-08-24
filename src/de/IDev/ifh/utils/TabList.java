@@ -38,7 +38,7 @@ public class TabList {
 				}
 				
 				for(Team t : sm.getTeams()) {
-					if(t.getPlayers().size() == 0) t.unregister();
+					if(t.getPlayers().isEmpty()) t.unregister();
 				}
 			}
 		}, 40, 40);

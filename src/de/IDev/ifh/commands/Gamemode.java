@@ -80,5 +80,4 @@ public class Gamemode implements CommandExecutor {
 		}
 		return true;
 	}
-
 }

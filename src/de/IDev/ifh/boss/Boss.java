@@ -4,6 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_19_R2.entity.CraftEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Zombie;
 
 import net.minecraft.world.entity.EntityInsentient;
 
@@ -40,6 +41,7 @@ public class Boss implements IBoss{
 
 	@Override
 	public void moveTo(Location loc, double speed) {
+		if(entity.isDead()) return;
 		((EntityInsentient) ((CraftEntity) entity).getHandle()).E().a(loc.getX(), loc.getY(),
 				loc.getZ(), speed);
 	}

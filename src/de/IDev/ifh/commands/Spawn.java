@@ -26,9 +26,9 @@ public class Spawn implements CommandExecutor {
 			return true;
 		}
 		Player p = (Player) s;
-		
 		if(spawnDelay.contains(p)) {
-			
+			p.sendMessage("§cDu befindest sich bereits in der Teleportation!");
+			return true;
 		}
 		if(args.length == 0 && p.getGameMode() == GameMode.CREATIVE) {
 			p.teleport(getSpawnLoc());
@@ -75,4 +75,18 @@ public class Spawn implements CommandExecutor {
 		return new Location(Bukkit.getWorld(world), x, y, z, (float) yaw, pitch);
 	}
 	
+	public static boolean isInQueue(Player p) {
+		return spawnDelay.contains(p);
+	}
+	
+	public static void removePlayerFromQueue(Player p) {
+		spawnDelay.remove(p);
+	}
+	
+	public static boolean cancelSpawn(Player p) {
+		if(!isInQueue(p)) return false;
+		removePlayerFromQueue(p);
+		p.sendMessage("§cDeine Teleportation wurde abgebrochen!");
+		return true;
+	}
 }

@@ -12,6 +12,7 @@ import de.IDev.ifh.commands.DeleteMessage;
 import de.IDev.ifh.commands.Gamemode;
 import de.IDev.ifh.commands.Heal;
 import de.IDev.ifh.commands.Kill;
+import de.IDev.ifh.commands.ResetPlayer;
 import de.IDev.ifh.commands.SetBossSpawn;
 import de.IDev.ifh.commands.SetSpawn;
 import de.IDev.ifh.commands.SetWarp;
@@ -25,6 +26,7 @@ import de.IDev.ifh.event.Bow;
 import de.IDev.ifh.event.Chat;
 import de.IDev.ifh.event.Damage;
 import de.IDev.ifh.event.Death;
+import de.IDev.ifh.event.EntityTarget;
 import de.IDev.ifh.event.Explosion;
 import de.IDev.ifh.event.Food;
 import de.IDev.ifh.event.ItemInteract;
@@ -32,6 +34,7 @@ import de.IDev.ifh.event.ItemPickUp;
 import de.IDev.ifh.event.ClickItem;
 import de.IDev.ifh.event.Join;
 import de.IDev.ifh.event.Leave;
+import de.IDev.ifh.event.Move;
 import de.IDev.ifh.event.Phsic;
 import de.IDev.ifh.event.Shovel;
 import de.IDev.ifh.utils.CombatLog;
@@ -76,6 +79,7 @@ public class FFA extends JavaPlugin{
 		getCommand("warp").setExecutor(new Warp());
 		getCommand("setwarp").setExecutor(new SetWarp());
 		getCommand("setbossspawn").setExecutor(new SetBossSpawn());
+		getCommand("resetplayer").setExecutor(new ResetPlayer());
 		
 		//Register Listeners
 		PluginManager pm = Bukkit.getPluginManager();
@@ -94,6 +98,8 @@ public class FFA extends JavaPlugin{
 		pm.registerEvents(new Food(), this);
 		pm.registerEvents(new BlockPlace(), this);
 		pm.registerEvents(new ItemInteract(), this);
+		pm.registerEvents(new Move(), this);
+		pm.registerEvents(new EntityTarget(), this);
 		
 		pm.registerEvents(new EntityCompust(), this);
 		
