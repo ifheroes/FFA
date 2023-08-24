@@ -8,10 +8,10 @@ import de.IDev.ifh.FFA;
 
 public class File {
 
-	java.io.File f;
-	YamlConfiguration yml;
-	String name;
-	String path;
+	private java.io.File f;
+	private YamlConfiguration yml;
+	private String name;
+	private String path;
 
 	public File(String name, String path) {
 		this.name = name;
@@ -23,12 +23,15 @@ public class File {
 
 		f = new java.io.File(this.path, name);
 
-		if (!f.getParentFile().exists())
-			f.getParentFile().mkdirs();
-
-		yml = YamlConfiguration.loadConfiguration(f);
-
-		save();
+		if (!f.exists()) {
+            f.getParentFile().mkdirs();
+            try {
+                f.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        yml = YamlConfiguration.loadConfiguration(f);
 	}
 
 	public String getname() {
@@ -57,19 +60,10 @@ public class File {
 	}
 
 	public void save() {
-		if (!f.exists()) {
-			try {
-				f.createNewFile();
-				yml.options().copyDefaults(true);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-		try {
-			yml.save(f);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+        try {
+            yml.save(f);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
